@@ -17,7 +17,6 @@ def test_initiation(vote, accounts):
     assert end_registration < end_voting
 
     
-
 def test_signup(vote, accounts):
     vote.signupAsCandidate({'from': accounts[0]})
     vote.signupAsCandidate({'from': accounts[1]})
@@ -36,9 +35,6 @@ def test_signup(vote, accounts):
     assert count == number_candidates
 
 
-
-
-    
 def test_vote(vote, accounts):
     candidates, votes = vote.getResults()
     for i in range(3):
@@ -62,3 +58,12 @@ def test_vote(vote, accounts):
             assert votes[i] == 0
 
 
+def test_initiation_before_voting_ends(vote, accounts):
+    with brownie.reverts("Patience, the current voting is not over."):
+        vote.initiateElection()
+    
+
+
+def test_signup_after_registration_ends(vote, accounts):
+    with brownie.reverts("You can no longer register as a candidate for this election."):
+        vote.signupAsCandidate({'from': accounts[3]})
