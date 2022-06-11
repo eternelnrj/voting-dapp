@@ -1,5 +1,6 @@
 import pytest
 from brownie import accounts, Vote, chain, web3
+import brownie
 
 @pytest.fixture(scope="module")
 def vote(Vote, accounts):
@@ -8,39 +9,43 @@ def vote(Vote, accounts):
 
 def test_initiation(vote, accounts):
     vote.initiateElection()
-    vote.signupAsCandidate({'from': accounts[0]})
+    start_registration = vote.startRegistration()
+    end_registration = vote.endRegistration()
+    end_voting = vote.endVoting()
 
-    candidates, votes = vote.getResults()
-    number_candidates = vote.getNumberCandidates()
+    assert start_registration < end_registration
+    assert end_registration < end_voting
 
-    assert votes[0] == 0
-    assert number_candidates == 1
     
 
 def test_signup(vote, accounts):
+    vote.signupAsCandidate({'from': accounts[0]})
     vote.signupAsCandidate({'from': accounts[1]})
     vote.signupAsCandidate({'from': accounts[2]})
 
     number_candidates = vote.getNumberCandidates()
     assert number_candidates == 3
 
-    candidates, votes = vote.getResults()
-    registered_candidates = set(candidates[:3])
-    count = 0
+    candidates, _ = vote.getResults()
 
+    count = 0
     for i in range(3):
-        if accounts[i] in registered_candidates:
+        if accounts[i] in set(candidates[:3]):
             count += 1
 
     assert count == number_candidates
 
 
-    for i in range(3):
-        assert votes[i] == 0
+
 
     
 def test_vote(vote, accounts):
-    chain.mine(25)
+    candidates, votes = vote.getResults()
+    for i in range(3):
+        assert votes[i] == 0
+
+    length_registration = vote.LENGTH_REGISTRATION_IN_BLOCKS()
+    chain.mine(length_registration + 1)
 
     vote.vote(accounts[0], {'from': accounts[3]})
     vote.vote(accounts[0], {'from': accounts[4]})
@@ -55,3 +60,5 @@ def test_vote(vote, accounts):
             assert votes[i] == 1
         else:
             assert votes[i] == 0
+
+
