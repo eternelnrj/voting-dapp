@@ -4,14 +4,17 @@
 <head>
     <title> Election </title>
     <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
 
-    <button id="connect-btn"> Connect Wallet</button>
-    <button id="disconnect-btn"> Disconnect </button>
-    <button id="initiate-btn"> Initiate election </button>
-    <button id="signup-btn"> Sign up as candidate </button>
+    <button id="connect-btn" class="connect-btn"> Connect Wallet</button>
+    <br>
+    <br>
+    <br>
+    <button id="initiate-btn" class="initiate-btn"> Initiate election </button>
+    <button id="signup-btn" class="signup-btn"> Sign up as candidate </button>
 
     <br>
     <span id="user" style="color:blue"></span>
@@ -24,7 +27,9 @@
         }
         </style>
 
-    <script src="./dist/bundle.js" type="text/javascript">  </script>
+    <script src="./dist/main.js" type="module">  </script>
+    <script src="./dist/contracts_and_abi.js" type="module">  </script>
+    <script src="./dist/secondary_functions.js" type="module">  </script>
     
 
 </body>
