@@ -7,15 +7,14 @@ const serverUrl = moralisInfo["serverUrl"];
 const appId = moralisInfo["appId"];
 Moralis.start({ serverUrl, appId });
 
-if (Moralis.User.current()){Moralis.User.logOut();};
+if (Moralis.User.current()){ Moralis.User.logOut(); };
 
 async function connect() { 
   if (!Moralis.User.current()) {
-    await Moralis.authenticate({ signingMessage: "Log in using Moralis"});
+    await Moralis.authenticate({ signingMessage: "Log in using Moralis" });
   }
   await refresh();
 }
-
 
 async function initiateElection() {
   const numberCandidates = await getNumberCandidates();
@@ -29,10 +28,7 @@ async function initiateElection() {
   const tx = await Moralis.executeFunction(writeOptionsInitiateElection);
   await tx.wait();
   removeVoteButtons(numberCandidates);
-
-  await refresh();
-  }
-  
+}
 
 async function signupAsCandidate() {
   const writeOptionsSignupAsCandidate = {
@@ -44,22 +40,21 @@ async function signupAsCandidate() {
   const tx = await Moralis.executeFunction(writeOptionsSignupAsCandidate);
   await tx.wait();
   await refresh();
-  }
+}
   
 
-  async function vote(candidate) {
-    const writeOptionsVote = {
-      contractAddress: votingInfo["contractAddress"],
-      functionName: "vote",
-      abi: votingInfo["abi"],
-      params: {candidate:candidate}
-    };
+async function vote(candidate) {
+  const writeOptionsVote = {
+    contractAddress: votingInfo["contractAddress"],
+    functionName: "vote",
+    abi: votingInfo["abi"],
+    params: {candidate:candidate}
+  };
   
-    const tx = await Moralis.executeFunction(writeOptionsVote);
-    await tx.wait();
-    await refresh();
-  }
-  
+  const tx = await Moralis.executeFunction(writeOptionsVote);
+  await tx.wait();
+  await refresh();
+}
 
 
 document.getElementById("connect-btn").onclick = connect;

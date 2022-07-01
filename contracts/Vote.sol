@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 
-contract Vote{
+contract Vote {
     uint256 public constant MAX_NUMBER_CANDIDATES = 5;
     uint256 public constant LENGTH_REGISTRATION_IN_BLOCKS = 20;
     uint256 public constant LENGTH_VOTING_IN_BLOCKS = 50;
@@ -50,21 +50,20 @@ contract Vote{
     }
 
     function getResults() public view returns (address[5] memory, uint256[5] memory) {
-        uint256[5]  memory votes_;
         address[5]  memory candidates_;
+        uint256[5]  memory votes_;
 
         for (uint256 i=0; i < candidates.length; i++) {
-            votes_[i] = accountToVotesReceived[candidates[i]];
             candidates_[i] = candidates[i];
+            votes_[i] = accountToVotesReceived[candidates[i]];
+   
         }
 
         return (candidates_, votes_);
     }
 
     function getNumberCandidates() public view returns (uint256) {
-
         return candidates.length;
-
     }
 
     function resetMappings() internal {

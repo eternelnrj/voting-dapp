@@ -1,21 +1,21 @@
 {
   "contracts": {
-    "Vote": "909a84c0f31ba15190e9a0a32a3b93cae4df9cad"
+    "Vote": "e51bc3df9cf1b9129d39a4eab5b179d6153282ad"
   },
   "tests": {
     "tests/test_everything.py": {
       "coverage": false,
       "isolated": false,
       "results": ".....",
-      "sha1": "2171501460b98d4b3ec2535734d5f721e167403d",
+      "sha1": "a2d6b5cc05ebd2350d57b5de6f69f05cdb5c20ca",
       "txhash": [
-        "2bfa27f401a52ee706f37a5024fc258e4f99510f",
-        "d6ac4fb927bcfdb5a049463461e25c7861a6355c"
+        "23447486c56898433cb4aaa546e297c58b11ccf0",
+        "ca330cf44791ab45d65e89c6fdde3bef6cd066b3"
       ]
     }
   },
   "tx": {
-    "2bfa27f401a52ee706f37a5024fc258e4f99510f": {
+    "23447486c56898433cb4aaa546e297c58b11ccf0": {
       "Vote": {
         "0": [
           [
@@ -28,7 +28,7 @@
         ]
       }
     },
-    "d6ac4fb927bcfdb5a049463461e25c7861a6355c": {
+    "ca330cf44791ab45d65e89c6fdde3bef6cd066b3": {
       "Vote": {
         "0": [
           [

@@ -2,12 +2,12 @@ import pytest
 from brownie import accounts, Vote, chain, web3
 import brownie
 
+
 @pytest.fixture(scope="module")
 def vote(Vote, accounts):
     return Vote.deploy({"from": accounts[0]})
 
-
-def test_initiation(vote, accounts):
+def test_initiation(vote):
     vote.initiateElection()
     start_registration = vote.startRegistration()
     end_registration = vote.endRegistration()
@@ -15,7 +15,6 @@ def test_initiation(vote, accounts):
 
     assert start_registration < end_registration
     assert end_registration < end_voting
-
     
 def test_signup(vote, accounts):
     vote.signupAsCandidate({'from': accounts[0]})
@@ -26,14 +25,7 @@ def test_signup(vote, accounts):
     assert number_candidates == 3
 
     candidates, _ = vote.getResults()
-
-    count = 0
-    for i in range(3):
-        if accounts[i] in set(candidates[:3]):
-            count += 1
-
-    assert count == number_candidates
-
+    assert set(accounts[:3]) == set(candidates[:3])
 
 def test_vote(vote, accounts):
     candidates, votes = vote.getResults()
@@ -57,12 +49,10 @@ def test_vote(vote, accounts):
         else:
             assert votes[i] == 0
 
-
-def test_initiation_before_voting_ends(vote, accounts):
+def test_initiation_before_voting_ends(vote):
     with brownie.reverts("Patience, the current voting is not over."):
         vote.initiateElection()
     
-
 
 def test_signup_after_registration_ends(vote, accounts):
     with brownie.reverts("You can no longer register as a candidate for this election."):
