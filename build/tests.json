@@ -1,41 +1,41 @@
 {
   "contracts": {
-    "Vote": "e51bc3df9cf1b9129d39a4eab5b179d6153282ad"
+    "Vote": "e1307be4f5e0eb13466d06f0fa618e6839d10515"
   },
   "tests": {
     "tests/test_everything.py": {
       "coverage": false,
       "isolated": false,
       "results": ".....",
-      "sha1": "a2d6b5cc05ebd2350d57b5de6f69f05cdb5c20ca",
+      "sha1": "1ff1d9d7c42ef5010d627ae6fec7975fc4a0bad4",
       "txhash": [
-        "23447486c56898433cb4aaa546e297c58b11ccf0",
-        "ca330cf44791ab45d65e89c6fdde3bef6cd066b3"
+        "9a331eca2df84d7f8dd39b70611305e3758709a2",
+        "b60c67f05d346b0b62df8582a07f18047077ced7"
       ]
     }
   },
   "tx": {
-    "23447486c56898433cb4aaa546e297c58b11ccf0": {
-      "Vote": {
-        "0": [
-          [
-            0
-          ],
-          [
-            30
-          ],
-          []
-        ]
-      }
-    },
-    "ca330cf44791ab45d65e89c6fdde3bef6cd066b3": {
+    "9a331eca2df84d7f8dd39b70611305e3758709a2": {
       "Vote": {
         "0": [
           [
             18
           ],
           [
-            35
+            37
+          ],
+          []
+        ]
+      }
+    },
+    "b60c67f05d346b0b62df8582a07f18047077ced7": {
+      "Vote": {
+        "0": [
+          [
+            0
+          ],
+          [
+            31
           ],
           []
         ]

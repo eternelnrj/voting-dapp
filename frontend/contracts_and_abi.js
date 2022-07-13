@@ -1,6 +1,6 @@
 const votingInfo = {
-    "contractAddress" : "0xE1326A94def0E05059824EeA4413911765928EFF",
-    "abi" : require("../build/deployments/42/0xE1326A94def0E05059824EeA4413911765928EFF.json")["abi"]
+    "contractAddress" : "0xB8Eb9f8F914Df73CDc4aa747E775DA96D680CE56",
+    "abi" : require("../build/deployments/42/0xB8Eb9f8F914Df73CDc4aa747E775DA96D680CE56.json")["abi"]
 }
 
 

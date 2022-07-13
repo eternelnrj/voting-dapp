@@ -21,10 +21,10 @@ async function refresh() {
 
 function createVoteButton(index) {
   const btn = document.createElement("button");
-
-  btn.type = "submit";
+  btn.type = "button";
   btn.name = "vote-btn " + index;
   btn.id = "vote-btn " + index;
+
   return btn;
 }
   

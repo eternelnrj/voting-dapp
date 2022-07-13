@@ -7,7 +7,6 @@ contract Vote {
     uint256 public constant LENGTH_REGISTRATION_IN_BLOCKS = 20;
     uint256 public constant LENGTH_VOTING_IN_BLOCKS = 50;
 
-    uint256 public startRegistration = 0;
     uint256 public endRegistration = 0;
     uint256 public endVoting = 0;
 
@@ -21,7 +20,6 @@ contract Vote {
     function initiateElection() public {
         require(block.number > endVoting, "Patience, the current voting is not over.");
 
-        startRegistration = block.number;
         endRegistration = block.number + LENGTH_REGISTRATION_IN_BLOCKS;
         endVoting = endRegistration + LENGTH_VOTING_IN_BLOCKS;
 
@@ -32,6 +30,7 @@ contract Vote {
     function signupAsCandidate() public {
         require(block.number <= endRegistration, "You can no longer register as a candidate for this election.");
         require(candidates.length < MAX_NUMBER_CANDIDATES, "Maximum number of candidates reached for this election.");
+        require(msg.sender == tx.origin, "Only externally owned accounts have the right register as candidates.");
         require(!accountToRegistration[msg.sender], "You are already registered as a candidate for this election.");
         
         accountToRegistration[msg.sender] = true;
@@ -41,6 +40,7 @@ contract Vote {
     function vote(address candidate) public {
         require(block.number > endRegistration, "Patience, the registration period is not over!"); 
         require(block.number <= endVoting, "The vote is over."); 
+        require(msg.sender == tx.origin, "Only externally owned accounts have the right to vote.");
         require(accountToRegistration[candidate], "This address is not registered as a candidate."); 
         require(!accountToHasVoted[msg.sender], "You have already voted.");
 
@@ -56,7 +56,6 @@ contract Vote {
         for (uint256 i=0; i < candidates.length; i++) {
             candidates_[i] = candidates[i];
             votes_[i] = accountToVotesReceived[candidates[i]];
-   
         }
 
         return (candidates_, votes_);

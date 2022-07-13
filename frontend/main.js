@@ -17,13 +17,13 @@ async function connect() {
 }
 
 async function initiateElection() {
-  const numberCandidates = await getNumberCandidates();
-
   const writeOptionsInitiateElection = {
     contractAddress: votingInfo["contractAddress"],
     functionName: "initiateElection",
     abi: votingInfo["abi"],
   };
+
+  const numberCandidates = await getNumberCandidates();
 
   const tx = await Moralis.executeFunction(writeOptionsInitiateElection);
   await tx.wait();
@@ -41,7 +41,6 @@ async function signupAsCandidate() {
   await tx.wait();
   await refresh();
 }
-  
 
 async function vote(candidate) {
   const writeOptionsVote = {
