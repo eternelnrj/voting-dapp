@@ -10,7 +10,7 @@ You need to create an account on `https://moralis.io/` and create a new dapp wit
 testnet enabled. Use the server url and app id of the moralis dapp to create a `.config.json` file with content `{` `"serverUrl" : "YOUR_URL",`
 `"appId" : "YOUR_APP_ID"`
 `}` inside the frontend folder.
-You can now launch the voting dapp with the command `http-server` from frontend folder.
+You can then launch the voting dapp with the command `http-server` from frontend folder.
 
 
 

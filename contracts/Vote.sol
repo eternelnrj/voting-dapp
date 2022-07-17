@@ -49,9 +49,9 @@ contract Vote {
         voters.push(msg.sender);
     }
 
-    function getResults() public view returns (address[5] memory, uint256[5] memory) {
-        address[5]  memory candidates_;
-        uint256[5]  memory votes_;
+    function getResults() public view returns (address[MAX_NUMBER_CANDIDATES] memory, uint256[MAX_NUMBER_CANDIDATES] memory) {
+        address[MAX_NUMBER_CANDIDATES]  memory candidates_;
+        uint256[MAX_NUMBER_CANDIDATES]  memory votes_;
 
         for (uint256 i=0; i < candidates.length; i++) {
             candidates_[i] = candidates[i];
